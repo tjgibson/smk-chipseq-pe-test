@@ -1,16 +1,16 @@
-# rule make_bigwigs_ind:
-# 	input:
-#		bam = "results/aligned_reads/filtered/{sample}.bam",
-#		bai = "results/aligned_reads/filtered/{sample}.bam.bai"
-#	output:
-#		"results/bigwigs/coverage/individual/{sample}.bw"
-#	conda:
-#		"../envs/deeptools.yaml"
-#	params:
-#		extra=config["params"]["bigwigs_ind"] 
-#	threads: 8
-#	shell:
-#		"bamCoverage --bam {input.bam} -o {output} -p {threads} {params.extra}"
+rule make_bigwigs_ind:
+	input:
+	bam = "results/aligned_reads/filtered/{sample}.bam",
+	bai = "results/aligned_reads/filtered/{sample}.bam.bai"
+output:
+	"results/bigwigs/coverage/individual/{sample}.bw"
+conda:
+	"../envs/deeptools.yaml"
+params:
+	extra=config["params"]["bigwigs_ind"] 
+threads: 8
+shell:
+	"bamCoverage --bam {input.bam} -o {output} -p {threads} {params.extra}"
 
 rule merge_bam:
 	input:
@@ -39,18 +39,18 @@ rule samtools_index_merged:
         "v1.1.0/bio/samtools/index"
         
 #rule make_bigwigs_merged:
-#	input:
-#		bam = "results/aligned_reads/merged/{sample}.bam",
-#		bai = "results/aligned_reads/merged/{sample}.bam.bai"
-#	output:
-#		"results/bigwigs/coverage/merged/{sample}.bw"
-#	conda:
-#		"../envs/deeptools.yaml"
-#	params:
-#		extra=config["params"]["bigwigs_merged"] 
-#	threads: 8
-#	shell:
-#		"bamCoverage --bam {input.bam} -o {output} -p {threads} {params.extra}"
+input:
+	bam = "results/aligned_reads/merged/{sample}.bam",
+	bai = "results/aligned_reads/merged/{sample}.bam.bai"
+output:
+	"results/bigwigs/coverage/merged/{sample}.bw"
+conda:
+	"../envs/deeptools.yaml"
+params:
+	extra=config["params"]["bigwigs_merged"] 
+threads: 8
+shell:
+	"bamCoverage --bam {input.bam} -o {output} -p {threads} {params.extra}"
 
 rule input_normalize_ind_bigwigs:
 	input:
