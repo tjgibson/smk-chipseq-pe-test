@@ -210,24 +210,24 @@ def get_final_output():
 # 				)
 # 			)
 
-#	# bigwig files for individual replicates
-#	final_output.extend(expand(
-#					[
-#						"results/bigwigs/coverage/individual/{sample}.bw"
-#					],
-#					sample = units["sample_name"]
-#				)
-#			)
+	# bigwig files for individual replicates
+	final_output.extend(expand(
+					[
+						"results/bigwigs/coverage/individual/{sample}.bw"
+					],
+					sample = units["sample_name"]
+				)
+			)
 
 	
-#	# bigwig files for merged replicates
-#	final_output.extend(expand(
-#					[
-#						"results/bigwigs/coverage/merged/{sample}.bw"
-#					],
-#					sample = units["sample_group"]
-#				)
-#			)
+	# bigwig files for merged replicates
+	final_output.extend(expand(
+					[
+						"results/bigwigs/coverage/merged/{sample}.bw"
+					],
+					sample = units["sample_group"]
+				)
+			)
 
 	# add input normalized bigwig output
 	if any( (units["call_peaks"])):
